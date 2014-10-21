@@ -1,0 +1,9 @@
+## Interface: 60000
+## Title: All My Glyphs
+## Author: Vincent Pelletier
+## Version: @project-version@
+## Notes: List glyphs your alts (don't) know
+## SavedVariables: AllMyGlyphsDB
+## Dependencies: Ace3
+
+AllMyGlyphs.lua
