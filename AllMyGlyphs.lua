@@ -161,14 +161,25 @@ function AllMyGlyphs:dump(input, editBox)
 end
 
 function AllMyGlyphs:forget(input, editBox)
-    local exists = self.toon_db[input]
-    if exists == nil then
-        self:Print(ERR_FRIEND_NOT_FOUND)
-    else
+    if input and input:trim() then
+        local exists = self.toon_db[input]
+        if exists == nil then
+            self:Print(ERR_FRIEND_NOT_FOUND)
+            return
+        end
         self.toon_db[input] = nil
         self.need_update = true
         self:Print(SUCCESS)
+        return
     end
+    for toon_ident, _ in pairs(self.toon_db) do
+        self.toon_db[toon_ident] = nil
+    end
+    for glyph_id, _ in pairs(self.current_toon_db[GLYPH_KEY]) do
+        self.current_toon_db[glyph_id] = nil
+    end
+    self.need_update = true
+    self:Print(SUCCESS)
 end
 
 function AllMyGlyphs:updateGlyphs()
